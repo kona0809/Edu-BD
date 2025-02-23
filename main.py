@@ -4,18 +4,21 @@ import os
 from dotenv import load_dotenv
 import openai
 
-# Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
 # Initialize OpenAI client
-openai.api_key = os.getenv('OPENAI_API_KEY')  # Ensure your .env file has this key
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 # Store tasks in memory (you might want to use a database in production)
 tasks = []
 task_id_counter = 1
+
+@app.route('/')
+def home():
+    return jsonify({"message": "Welcome to the API!"})
 
 @app.route('/api/tasks', methods=['GET'])
 def get_tasks():
@@ -55,5 +58,5 @@ def ai_help():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Removed app.run() line for Gunicorn
-
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=3000)
