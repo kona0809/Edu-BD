@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Manager</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <h1>Task Manager</h1>
+        <h1>✨ Task Manager</h1>
         <div class="add-task">
-            <input type="text" id="taskTitle" placeholder="Enter task title">
-            <button onclick="addTask()">Add Task</button>
+            <input type="text" id="taskTitle" placeholder="What needs to be done?" autofocus>
+            <button onclick="addTask()">
+                <i class="fas fa-plus"></i> Add Task
+            </button>
         </div>
         <div id="taskList" class="task-list"></div>
     </div>
-    <script src="{{ url_for('static', filename='app.js') }}"></script>
+    <script src="app.js"></script>
 </body>
 </html>
