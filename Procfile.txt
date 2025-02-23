@@ -1,0 +1,2 @@
+gunicorn -w 4 -k gthread main:app
+
