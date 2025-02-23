@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory, render_template
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
@@ -18,7 +18,10 @@ task_id_counter = 1
 
 @app.route('/')
 def index():
-    return render_template('index.html')  # Serve index.html from templates
+    try:
+        return send_from_directory('', 'index.html')  # Adjust the path if necessary
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/api/tasks', methods=['GET'])
 def get_tasks():
