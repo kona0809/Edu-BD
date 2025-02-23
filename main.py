@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
@@ -17,8 +17,8 @@ tasks = []
 task_id_counter = 1
 
 @app.route('/')
-def home():
-    return jsonify({"message": "Welcome to the API!"})
+def serve_index():
+    return send_from_directory('', 'index.html')
 
 @app.route('/api/tasks', methods=['GET'])
 def get_tasks():
@@ -31,8 +31,8 @@ def add_task():
     task = {
         'id': task_id_counter,
         'title': data['title'],
-        'description': data['description'],
-        'time': data['time'],
+        'description': data.get('description', ''),
+        'time': data.get('time', ''),
         'completed': False
     }
     tasks.append(task)
@@ -57,6 +57,10 @@ def ai_help():
         return jsonify({"answer": answer})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@app.route('/<path:path>')
+def send_static(path):
+    return send_from_directory('', path)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000)
