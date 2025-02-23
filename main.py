@@ -18,7 +18,7 @@ task_id_counter = 1
 
 @app.route('/')
 def index():
-    return send_from_directory('', 'index.html')
+    return render_template('index.html')  # Serve index.html from templates
 
 @app.route('/api/tasks', methods=['GET'])
 def get_tasks():
