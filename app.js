@@ -47,4 +47,3 @@ async function toggleTask(taskId, completed) {
 
 // Load tasks when page loads
 document.addEventListener('DOMContentLoaded', loadTasks);
-
